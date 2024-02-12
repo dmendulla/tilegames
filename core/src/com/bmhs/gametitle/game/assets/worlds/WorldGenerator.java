@@ -15,7 +15,7 @@ public class WorldGenerator {
 
     private int[][] worldIntMap;
 
-    private int seedColor, grass, sand, trees;
+    private int seedColor, grass, sand, trees, stone, bush;
 
     public WorldGenerator (int worldMapRows, int worldMapColumns) {
         this.worldMapRows = worldMapRows;
@@ -23,23 +23,21 @@ public class WorldGenerator {
 
         worldIntMap = new int[worldMapRows][worldMapColumns];
 
-        seedColor = 61;
+        seedColor = 15;
         sand = 29;
-        grass = 67;
-        trees = 85;
+        grass = 68;
+        trees = 86;
+        stone = 106;
+        bush = 96;
 
-            Vector2 mapSeed = new Vector2(MathUtils.random(worldIntMap[0].length), MathUtils.random(worldIntMap.length));
+                Vector2 mapSeed = new Vector2(MathUtils.random(worldIntMap[0].length), MathUtils.random(worldIntMap.length));
         System.out.println(mapSeed.y + " "+ mapSeed.x);
 
 
         worldIntMap[(int)mapSeed.y][(int)mapSeed.x] = 4;
         for(int r = 0; r < worldIntMap.length; r++) {
             for(int c = 0; c < worldIntMap[r].length; c++) {
-                worldIntMap[r][c] = 84;
-                Vector2 tempVector = new Vector2(c, r);
-                if(tempVector.dst(mapSeed) < 25 ) {
-                    worldIntMap[r][c] = grass;
-                }
+                worldIntMap[r][c] = 85;
             }
         }
 
@@ -47,11 +45,15 @@ public class WorldGenerator {
         //call methods to build 2D array
         // randomize();
         // generateWorldTextFile();
-        searchAndExpand(10, seedColor, sand, 0.20);
-        searchAndExpand(7, seedColor, grass, 0.15);
-        searchAndExpand(6, seedColor, trees, 0.85);
-        searchAndExpand(5, seedColor, grass, 0.35);
-        searchAndExpand(4, seedColor, grass, 0.15);
+        searchAndExpand(25, seedColor, sand, 0.03);
+        searchAndExpand(20, seedColor, grass, 0.10);
+        searchAndExpand(20, seedColor, trees, 0.85);
+        searchAndExpand(20, seedColor, stone, 0.95);
+        searchAndExpand(20, seedColor, bush, 0.95);
+        searchAndExpand(15, seedColor, 5, 0.10);
+        searchAndExpand(13, seedColor, 6, 0.35);
+        searchAndExpand(6, seedColor, 14, 0.00);
+        searchAndExpand(6, seedColor, 15, 0.90);
 
         Gdx.app.error("WorldGenerator", "WorldGenerator(WorldTile[][][])");
     }
@@ -70,11 +72,13 @@ public class WorldGenerator {
                 if(worldIntMap[r][c] == numToFind) {
                     for(int subRow = r-radius; subRow <= r+radius; subRow++) {
                         for(int subCol = c-radius; subCol <= c+radius; subCol++) {
-                            Vector2 mapSeed = new Vector2(MathUtils.random(worldIntMap[0].length), MathUtils.random(worldIntMap.length));
+                            if(subRow >= 0 && subCol >= 0 && subRow <= worldIntMap.length-1 && subCol <= worldIntMap[0].length-1 && worldIntMap[subRow][subCol] != numToFind) {
                                 if(Math.random() > probability) {
                                     worldIntMap[subRow][subCol] = numToWrite;
                                 }
-                            }                        }
+                            }
+
+                        }
                     }
 
                 }

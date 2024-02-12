@@ -53,33 +53,53 @@ public class TitleScreen implements Screen {
         showWorldTiles.setWidth(150);
         showWorldTiles.setHeight(25);
         showWorldTiles.setPosition(20, 20);
-        showWorldTiles.addListener(new InputListener(){
+        showWorldTiles.addListener(new InputListener() {
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 game.setScreen(new TileArrayTestScreen(game, parent, TileHandler.getTileHandler().getWorldTileArray()));
             }
+
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
         });
         titleScreenStage.addActor(showWorldTiles);
 
+
         TextButton worldGenTest = new TextButton("Show WorldGen", game.skin, "default");
         worldGenTest.setWidth(150);
         worldGenTest.setHeight(25);
         worldGenTest.setPosition(20, 55);
-        worldGenTest.addListener(new InputListener(){
+        worldGenTest.addListener(new InputListener() {
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 game.setScreen(new WorldGenTestScreen(game, parent));
             }
+
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
         });
         titleScreenStage.addActor(worldGenTest);
+
+        TextButton npcTestScreen = new TextButton("Show NPCTest", game.skin, "default");
+        npcTestScreen.setWidth(150);
+        npcTestScreen.setHeight(25);
+        npcTestScreen.setPosition(20, 99);
+        npcTestScreen.addListener(new InputListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(new NPCTestScreen(game, parent));
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+        });
+        titleScreenStage.addActor(npcTestScreen);
     }
 
     @Override
