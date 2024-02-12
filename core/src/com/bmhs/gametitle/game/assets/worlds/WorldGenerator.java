@@ -45,6 +45,7 @@ public class WorldGenerator {
         //call methods to build 2D array
         // randomize();
         // generateWorldTextFile();
+        searchAndExpand(26, seedColor, 45, 0.03);
         searchAndExpand(25, seedColor, sand, 0.03);
         searchAndExpand(20, seedColor, grass, 0.10);
         searchAndExpand(20, seedColor, trees, 0.85);
@@ -53,7 +54,7 @@ public class WorldGenerator {
         searchAndExpand(15, seedColor, 5, 0.10);
         searchAndExpand(13, seedColor, 6, 0.35);
         searchAndExpand(6, seedColor, 14, 0.00);
-        searchAndExpand(6, seedColor, 15, 0.90);
+        searchAndExpand(6, seedColor, 16, 0.90);
 
         Gdx.app.error("WorldGenerator", "WorldGenerator(WorldTile[][][])");
     }
